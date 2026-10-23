@@ -28,14 +28,14 @@ footer{text-align:center;color:#fff;font-size:.8rem;opacity:.9}
 <div class="card"><h3 style="margin-top:0">💭 Post your doubt</h3>
 <h2 style="margin-top:0">💬 How was the seminar?</h2>
 <form id="f"><input id="n" maxlength="40" required minlength="2" placeholder="Your name (required)">
-<div id="stars" style="font-size:2.4rem;cursor:pointer;margin:.6rem 0;user-select:none">☆☆☆☆☆</div>
+<div id="stars" style="display:flex;gap:6px;margin:.6rem 0;user-select:none"><button type="button" data-v="1" style="flex:1;background:none;color:#f5b301;font-size:2.4rem;padding:4px 0;width:auto">☆</button><button type="button" data-v="2" style="flex:1;background:none;color:#f5b301;font-size:2.4rem;padding:4px 0;width:auto">☆</button><button type="button" data-v="3" style="flex:1;background:none;color:#f5b301;font-size:2.4rem;padding:4px 0;width:auto">☆</button><button type="button" data-v="4" style="flex:1;background:none;color:#f5b301;font-size:2.4rem;padding:4px 0;width:auto">☆</button><button type="button" data-v="5" style="flex:1;background:none;color:#f5b301;font-size:2.4rem;padding:4px 0;width:auto">☆</button></div>
 <textarea id="t" maxlength="240" placeholder="What did you like? What should be better?"></textarea>
 <button id="b">Send feedback 🙌</button><div class="msg" id="m"></div></form>
 <p class="meta"><a href="index.html">← Back to doubts</a></p></div>
 <script src="config.js"></script><script src="api.js"></script><script>
 let r=0;const s=document.getElementById('stars');
-const draw=()=>s.textContent='★'.repeat(r)+'☆'.repeat(5-r);
-s.onclick=e=>{const w=s.getBoundingClientRect();r=Math.min(5,Math.max(1,Math.ceil((e.clientX-w.left)/(w.width/5))));draw();};
+const draw=()=>s.querySelectorAll('button').forEach(b=>b.textContent=+b.dataset.v<=r?'★':'☆');
+s.querySelectorAll('button').forEach(b=>b.onclick=()=>{r=+b.dataset.v;draw();});
 document.getElementById('f').onsubmit=async e=>{e.preventDefault();const m=document.getElementById('m');
 if(!r){m.textContent='Tap a star rating first ⭐';return;}
 const name=document.getElementById('n').value.trim().slice(0,40),c=document.getElementById('t').value.trim();
