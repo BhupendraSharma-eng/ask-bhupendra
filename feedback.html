@@ -39,6 +39,6 @@ s.onclick=e=>{const w=s.getBoundingClientRect();r=Math.min(5,Math.max(1,Math.cei
 document.getElementById('f').onsubmit=async e=>{e.preventDefault();const m=document.getElementById('m');
 if(!r){m.textContent='Tap a star rating first ⭐';return;}
 const name=document.getElementById('n').value.trim().slice(0,40),c=document.getElementById('t').value.trim();
-try{await API.submit(name,`[Feedback ${'⭐'.repeat(r)}] ${c||'(no comment)'}`);m.textContent='Thank you! 💛';e.target.reset();r=0;draw();}
+try{await DoubtsAPI.submit(name,`[Feedback ${'⭐'.repeat(r)}] ${c||'(no comment)'}`);m.textContent='Thank you! 💛';e.target.reset();r=0;draw();}
 catch(x){m.textContent='Could not send, try again.';}};
 </script></body></html>
